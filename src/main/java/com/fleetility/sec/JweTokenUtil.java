@@ -1,4 +1,4 @@
-package com.fmis.sec;
+package com.fleetility.sec;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

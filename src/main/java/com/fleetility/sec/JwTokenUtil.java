@@ -1,4 +1,4 @@
-package com.fmis.sec;
+package com.fleetility.sec;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,11 +8,10 @@ import java.util.function.Function;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.fmis.exception.FmisException;
-import com.fmis.exception.InvalidUserException;
+import com.fleetility.exception.FleetilityException;
+import com.fleetility.exception.InvalidUserException;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -27,13 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class JwTokenUtil {
 
-	@Value("${app.fmis.security.secret-key}")
+	@Value("${app.fleetility.security.secret-key}")
 	protected  String SECRET;
 
-	@Value("${app.fmis.security.jwt-expiration-ms}")
+	@Value("${app.fleetility.security.jwt-expiration-ms}")
 	protected long expirationMs;
 	
-	@Value("${app.fmis.security.jwt-refresh-expiration-ms}")
+	@Value("${app.fleetility.security.jwt-refresh-expiration-ms}")
 	protected long refreshExpirationMs;
 	
 	protected static final String CLAIM_USERNAME = "CLAIM_USERNAME";
@@ -54,7 +53,7 @@ public abstract class JwTokenUtil {
 
 	public abstract JwtParser getParser();
 
-	public boolean validateToken(String authToken) throws InvalidUserException, ExpiredJwtException, FmisException {
+	public boolean validateToken(String authToken) throws InvalidUserException, ExpiredJwtException, FleetilityException {
 		boolean valid = false;
 		try {
 			valid = !isInvalidToken(authToken);
@@ -66,7 +65,7 @@ public abstract class JwTokenUtil {
 			throw new ExpiredJwtException(null, null, "JWT token is expired: {}");
 		} catch (Exception e) {
 			log.error(e.getMessage() + "  Exception ");
-			throw new FmisException("Invalid token Exception", null, null);
+			throw new FleetilityException("Invalid token Exception", null, null);
 		}
 		return valid;
 	}
@@ -85,7 +84,7 @@ public abstract class JwTokenUtil {
 	    Claims claims = extractClaims(token);
 	    UserInfo userInfo = new UserInfo();
 
-	    // Extract and map claims to FmisUserDetails fields
+	    // Extract and map claims to fleetilityUserDetails fields
 	    userInfo.setUsername((String) claims.get(CLAIM_USERNAME));
 	    userInfo.setUserId((String) claims.get(CLAIM_USER_ID)); // Assuming userId is a String, adapt if it's a different type
 	    userInfo.setCompanyId((String) claims.get(CLAIM_COMPANY_ID)); // Adapt if companyId has a different type
@@ -133,7 +132,7 @@ public abstract class JwTokenUtil {
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 	
-//	public void getAuthenticationToken(final String token, final Authentication existingAuth, final fmisUserDetails userDetails) {
+//	public void getAuthenticationToken(final String token, final Authentication existingAuth, final fleetilityUserDetails userDetails) {
 //        final Claims claims = extractClaims(token);
 //
 //        final Collection<? extends GrantedAuthority> authorities =

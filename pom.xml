@@ -4,20 +4,20 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.fmis</groupId>
-		<artifactId>fmis-be</artifactId>
+		<groupId>com.fleetility</groupId>
+		<artifactId>fleetility-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../fmis-be/pom.xml</relativePath>
+		<relativePath>../fleetility-parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>fmis-security-utils</artifactId>
+	<artifactId>fleetility-security-utils</artifactId>
 	<name>Security Utils</name>
-	<description>fmis-security-utils</description>
+	<description>Fleetility Security Utils</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.fmis</groupId>
-			<artifactId>fmis-common</artifactId>
+			<groupId>com.fleetility</groupId>
+			<artifactId>fleetility-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
