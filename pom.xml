@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>fmis-security-utils</artifactId>
-	<name>fmis-security-utils</name>
+	<name>Security Utils</name>
 	<description>fmis-security-utils</description>
 
 	<dependencies>
