@@ -53,3 +53,4 @@ Thumbs.db
 
 # Node.js dependencies (if using frontend with Spring Boot)
 node_modules/
+/.factorypath
